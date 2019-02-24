@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Display a map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!--Add normalize.css-->
+    <!--
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" />
+    -->
+    <!--Add the Mapbox core script and style-->
+	<!--///////////////////////////////////////////////////////////////
+		NOTE: 	Embedded HTML request returned v0.52.0 (for both .js and .css)
+				Mapbox copy/paste said to use v0.49.0 (for both .js and .css)
+		/////////////////////////////////////////////////////////////////-->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="../css/myStyles.css" rel="stylesheet" />
+	
+
+	<!--/////////////////////////////////////////////////////////////////
+		Other scripts and styles in the embedded version that aren't here:
+		<script src='https://api.mapbox/com/mapbox-gl-js/plugins/mapbox-gl-instrumentile/v3.0.0/mapbox-gl-instrumentile.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+		<script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+		<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+		//////////////////////////////////////////////////////////////////-->
+	
+</head>
+<body>
+    <!--Add the Mapbox geocoder script and style-->
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css" type="text/css" />
+
+    <!--Mapbox map element-->
+    <div id='map'></div>
+
+
+    <script src="../js/MapboxHeatmapLayerObjects.js"></script>
+
+    <!--CefSharp Object Binding Script-->
+    <script type="text/javascript">
+
+        var mapboxMarkerArray = [];
+        var mapboxPopupArray = [];
+        var mapboxMarkerElementArray = [];
+
+        // add the source and layer for the traffic flow data
+        function addSourceAndLayer(sourceString) {
+            var geojsonData = JSON.parse(sourceString);
+            if (geojsonData.features[0].geometry.coordinates != null) {
+                map.addSource(
+                    'trafficFlow',
+                    {
+                        type: 'geojson',
+                        lineMetrics: true,
+                        data: geojsonData
+                    }
+                );
+                map.addLayer(trafficFlowLineLayer, 'road-label');
+            }
+        }
+
+        // acquire the current bounding box of the viewport,
+        // used for search parameters with Here API endpoints
+        function getBBoxParams() {
+            var bounds = map.getBounds();
+
+            var retObj = {
+                NW: bounds.getNorthWest(),
+                SE: bounds.getSouthEast()
+            };
+
+            return retObj;
+        }
+
+
+        function addMarkerAndPopup(innerContent, iconLocation, lng, lat) {
+            // create popup
+            var popup = new mapboxgl.Popup({ offset: 25 })
+                .setText(innerContent);
+
+            // create DOM element for marker
+            // and create the marker itself
+            if (iconLocation.length > 0) {
+                var el = document.createElement('div');
+                el.className = 'marker';
+                el.style.backgroundImage = 'url(' + iconLocation +')';
+                var marker = new mapboxgl.Marker(el);
+            }
+            else {
+                var marker = new mapboxgl.Marker();
+            }
+
+            marker.setLngLat([lng, lat])
+                .setPopup(popup)
+                .addTo(map);
+
+            // add popup and marker to their respective arrays
+            mapboxPopupArray.push(popup);
+            mapboxMarkerArray.push(marker);
+        }
+
+
+        (async function () {
+            await CefSharp.BindObjectAsync("jsBoundObject", "jsBound")
+            
+            jsBoundObject.getMapboxStyle(styleID, token)
+                .then(function (value) {
+                    map.setStyle(JSON.parse(value));
+                });
+                
+            map.on("moveend", function () {
+                window.jsBoundObject.handleOnMoveEndEvent();
+            });
+        })();
+    </script>
+    <!--Mapbox script-->
+    <script>
+        var styleID = 'cjr9m8b5w08u42tpohxlkuozh';
+        var token = 'pk.eyJ1IjoiYWNhdGFsZmFubyIsImEiOiJjanI5bGp6NXYwMWFqNDlwNXlqbWx3NHF2In0.PJNbRjFFZuT0t8flFxkGDA';
+        mapboxgl.accessToken = token;
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            center: [-83.0458, 42.3314],
+            zoom: 12.0,
+            pitch: 30,
+        });
+        
+        map.on('load', function ()
+        {
+            window.jsBoundObject.handleOnLoadEvent();
+
+            var layers = map.getStyle().layers;
+
+            var labelLayerId;
+            for (var i = 0; i < layers.length; i++) {
+                if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+                    labelLayerId = layers[i].id;
+                    break;
+                }
+            }
+
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+
+                    // use an 'interpolate' expression to add a smooth transition effect
+                    // to the buildings as the user zooms in
+                    'fill-extrusion-height': [
+                        "interpolate", ["linear"], ["zoom"],
+                        15, 0,
+                        15.05, ["get", "height"]
+                    ],
+                    'fill-extrusion-base': [
+                        "interpolate", ["linear"], ["zoom"],
+                        15, 0,
+                        15.05, ["get", "min_height"]
+                    ],
+                    'fill-extrusion-opacity': .6
+                }
+            }, labelLayerId);
+
+        });
+        
+        // add the geocoder search box control
+        var geocoder = new MapboxGeocoder({ accessToken: mapboxgl.accessToken });
+        map.addControl(geocoder);
+    </script>
+</body>
+</html>

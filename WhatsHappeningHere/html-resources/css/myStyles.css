@@ -1,0 +1,69 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+/*
+    All canvas events defined in:
+        https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js
+    All geocoder plugin events defined in:
+        https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js
+
+body
+    div#map.mapboxgl-map
+        div.mapboxgl-canary{visibility:hidden;}
+        
+        div.mapboxgl-canvas-container.mapboxgl-interactive.mapboxgl-touch-drag-pan.mapboxgl-touch-zoom-rotate(
+                                                                bubbling events: click, contextmenu, dblclick,
+                                                                keydown, mousedown, mousemove, mouseout,
+                                                                mouseover, mouseup, touchcancel, touchend,
+                                                                touchmove, touchstart, wheel)
+            canvas.mapboxgl-canvas[tabindex="0"][aria-label="Map"][width="1920"][height="1138"]
+                            (bubbling events: webglcontextlost, webglcontextrestored)
+                            {   position:absolute;
+                                width:1280px;
+                                height:759px;
+                            }
+
+        div.mapbox-control-container
+            div.mapboxgl-ctrl-top-left
+            div.mapboxgl-ctrl-top-right
+                div.mapboxgl-ctrl-geocoder.mapboxgl-ctrl
+                    span.geocoder-icon.geocoder-icon-search
+                    input[type="text"][placeholder="Search"](bubbling events:   blur, change, focus,
+                                                                                keydown, keydown, keyup, paste)
+                    ul.suggestions
+                    div.geocoder-pin-right
+                        button.geocoder-icon.geocoder-icon-close[aria-label="Clear"](bubbling events: click)
+                        span.geocoder-cion.geocoder-icon-loading
+
+            div.mapboxgl-ctrl-bottom-left
+                div.mapbox-ctrl{display:block;}
+                    a.mapboxgl-ctrl-logo[target="_blank"][href="https://www.mapbox.com"]
+                                        [aria-label="Mapbox logo"][rel="noopener"]
+            div.mapboxgl-ctrl-bottom-right
+                div.mapboxgl-ctrl.mapboxgl-ctrl-attrib
+                    a[href="https://www.mapbox.com/about/maps/"][target="_blank"]&copy; Mapbox
+                    a[href="https://www.openstreetmap.org/about/"][target="_blank"]&copy; OpenStreetMap
+                    a.mapbox-improve-map[href="https://www.mapbox.com/feedback/?owner=mapbox&id=streets-v9&access_token=pk.eyJ1IjoiYWNhdGFsZmFubyIsImEiOiJjanI5bGp6NXYwMWFqNDlwNXlqbWx3NHF2In0.PJNbRjFFZuT0t8flFxkGDA"]
+                                        [target="_blank"]Improve this map
+*/

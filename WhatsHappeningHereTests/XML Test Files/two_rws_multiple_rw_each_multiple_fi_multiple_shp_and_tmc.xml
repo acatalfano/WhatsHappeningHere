@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TRAFFICML_REALTIME xmlns="http://traffic.nokia.com/trafficml-flow-3.2" CREATED_TIMESTAMP="2019-02-15T22:21:24Z" MAP_VERSION="" UNITS="imperial" VERSION="3.2">
+  <RWS TY="TMC" MAP_VERSION="201804" EBU_COUNTRY_CODE="1" EXTENDED_COUNTRY_CODE="A0" TABLE_ID="8" UNITS="imperial">
+    <RW LI="108+00072" DE="M-10" PBT="2019-02-15T22:20:58Z" mid="881f26e0-1d43-4162-a589-0a33a074d4a2">
+      <FIS>
+        <FI>
+          <TMC PC="9891" DE="M-1/Woodward Ave" QD="-" LE="0.04528"/>
+          <SHP>42.32875,-83.04478 42.32856,-83.04509 </SHP>
+          <SHP>42.32856,-83.04509 42.32851,-83.04517 42.32835,-83.04548 </SHP>
+          <CF CN="0.7" FF="26.35" JF="2.9" SP="9.95" SU="9.95" TY="TR"/>
+        </FI>
+        <FI>
+          <TMC PC="4288" DE="Jefferson Ave" QD="-" LE="0.45126"/>
+          <SHP>42.32835,-83.04548 42.32831,-83.04558 </SHP>
+          <SHP>42.3264,-83.0511 42.32641,-83.05149 </SHP>
+          <SHP>42.32641,-83.05149 42.32641,-83.05155 42.32642,-83.0517 </SHP>
+          <CF CN="0.77" FF="43.31" JF="0.0" SP="43.43" SU="44.49" TY="TR"/>
+        </FI>
+        <FI>
+          <TMC PC="4289" DE="Howard St" QD="-" LE="0.47184"/>
+          <SHP>42.32857,-83.05762 42.32871,-83.0578 </SHP>
+          <SHP>42.32871,-83.0578 42.32888,-83.05803 42.32913,-83.05835 42.32947,-83.05879 42.32989,-83.0593 </SHP>
+          <SHP>42.32989,-83.0593 42.33009,-83.05954 42.33015,-83.05961 </SHP>
+          <CF CN="0.84" FF="44.74" JF="0.0" SP="44.74" SU="52.85" TY="TR"/>
+        </FI>
+      </FIS>
+    </RW>
+    <RW LI="108-00072" DE="M-10" PBT="2019-02-15T22:21:14Z" mid="0fb05bab-dd15-4edb-ae77-3882deb1dc32">
+      <FIS>
+        <FI>
+          <TMC PC="4288" DE="Jefferson Ave" QD="+" LE="0.39658"/>
+          <SHP>42.32681,-83.05481 42.32677,-83.0547 </SHP>
+          <SHP>42.32677,-83.0547 42.32664,-83.05435 </SHP>
+          <CF CN="0.75" FF="45.48" JF="0.0" SP="45.55" SU="50.46" TY="TR"/>
+        </FI>
+        <FI>
+          <TMC PC="9891" DE="M-1/Woodward Ave" QD="+" LE="0.36784"/>
+          <SHP>42.3282,-83.04535 42.32832,-83.04497 </SHP>
+          <SHP>42.32832,-83.04497 42.32847,-83.04457 </SHP>
+          <CF CN="0.82" FF="31.81" JF="0.0" SP="39.52" SU="39.52" TY="TR"/>
+        </FI>
+      </FIS>
+    </RW>
+  </RWS>
+  <RWS TY="TMC" MAP_VERSION="201804" EBU_COUNTRY_CODE="C" EXTENDED_COUNTRY_CODE="A1" TABLE_ID="9" UNITS="imperial">
+    <RW LI="C09-00785" DE="Detroit-Windsor Tunl" PBT="2019-02-15T22:21:00Z" mid="b04f82e2-b706-4abe-b408-ba9a96c84ebc">
+      <FIS>
+        <FI>
+          <TMC PC="10570" DE="US/Canada Border" QD="+" LE="0.60936"/>
+          <CF CN="0.7" FF="30.32" JF="3.21038" SP="16.78" SU="16.78" TY="TR"/>
+        </FI>
+      </FIS>
+    </RW>
+    <RW>
+      <FIS>
+        <FI>
+          <SHP>42.32417,-83.03969 42.32294,-83.03948 42.32142,-83.03917 42.32073,-83.03905 </SHP>
+          <CF CN="0.7" FF="31.07" JF="8.17712" SP="8.7" SU="8.7" TY="TR"/>
+        </FI>
+      </FIS>
+    </RW>
+  </RWS>
+</TRAFFICML_REALTIME>

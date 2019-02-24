@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TRAFFICML_REALTIME xmlns="http://traffic.nokia.com/trafficml-flow-3.2" CREATED_TIMESTAMP="2019-02-15T22:21:24Z" MAP_VERSION="" UNITS="imperial" VERSION="3.2">
+  <RWS TY="TMC" EBU_COUNTRY_CODE="1" EXTENDED_COUNTRY_CODE="A0" TABLE_ID="8"></RWS>
+  <RWS TY="TMC" EBU_COUNTRY_CODE="C" EXTENDED_COUNTRY_CODE="A1" TABLE_ID="9">
+    <RW>
+      <FIS>
+        <FI>
+          <TMC PC="10570" DE="US/Canada Border" QD="+" LE="0.60936"/>
+          <CF CN="0.7" FF="30.32" JF="3.21038" SP="16.78"/>
+        </FI>
+      </FIS>
+    </RW>
+  </RWS>
+</TRAFFICML_REALTIME>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TRAFFICML_REALTIME xmlns="http://traffic.nokia.com/trafficml-flow-3.2" CREATED_TIMESTAMP="2019-02-15T22:21:24Z" MAP_VERSION="" UNITS="imperial" VERSION="3.2">
+  <RWS TY="TMC" EBU_COUNTRY_CODE="1" EXTENDED_COUNTRY_CODE="A0" TABLE_ID="8"></RWS>
+  <RWS TY="TMC" EBU_COUNTRY_CODE="C" EXTENDED_COUNTRY_CODE="A1" TABLE_ID="9">
+    <RW LI="C09-00785" DE="Detroit-Windsor Tunl" PBT="2019-02-15T22:21:00Z" mid="b04f82e2-b706-4abe-b408-ba9a96c84ebc">
+      <FIS>
+        <FI>
+          <CF CN="0.7" FF="30.32" JF="3.21038" SP="16.78"/>
+        </FI>
+      </FIS>
+    </RW>
+  </RWS>
+</TRAFFICML_REALTIME>
