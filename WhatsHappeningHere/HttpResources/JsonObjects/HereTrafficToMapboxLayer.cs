@@ -33,38 +33,7 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                         Coordinates = (FI.Shape != null) ? new List<double[]>(FI.Shape) : null
                     }
                 };
-
-
-
-            /*
-            var query =
-                from datum in data
-                select new Feature
-                {
-                    Properties = new PropertyData
-                    {
-                        Confidence = datum.Confidence,
-                        JamFactor = datum.JamFactor
-                    },
-                    Geometry = new GeoData
-                    {
-                        Coordinates = (datum.Shape != null) ? new List<double[]>(datum.Shape) : null
-                    }
-                };
-
-            GeoJsonTraffic geoJsonData = new GeoJsonTraffic
-            {
-                Features = query.ToList()
-            };
-
-            return
-                JsonConvert.SerializeObject(
-                    geoJsonData,
-                    new JsonSerializerSettings { ContractResolver =  new CamelCasePropertyNamesContractResolver() }
-                );
-                */
-
-
+            
             GeoJsonTraffic geoJsonData = new GeoJsonTraffic
             {
                 Features = jsonQuery.ToList()
@@ -124,14 +93,14 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                                                                                     double.Parse(coords[1]),
                                                                                     double.Parse(coords[0])
                                                                                 }
-                                                                )?.ToList() // select coords         // TODO: maybe don't need that .ToList()
+                                                                )?.ToList() // select coords
 
                                 select new RoadwayData
                                 {
                                     PointTMCLocationCode = int.Parse(tmc?.Attribute("PC")?.Value ?? "-1"),
                                     RoadSegmentName = tmc?.Attribute("DE")?.Value,
                                     QueuingDirection = tmc?.Attribute("QD").Value,
-                                    Length = double.Parse(tmc?.Attribute("LE")?.Value ?? "-1.0"),        // TODO: maybe don't need this one
+                                    Length = double.Parse(tmc?.Attribute("LE")?.Value ?? "-1.0"),
 
                                     JamFactor = cf.Select(x => double.Parse(x.Attribute("JF").Value)).Average(),
                                     Confidence = cf.Select(x => double.Parse(x.Attribute("CN").Value)).Average(),
@@ -140,31 +109,6 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                                 } // select new
                             ).ToList() // FIList 
                     };
-
-
-                /*
-                var trafficQuery =
-                    from rws in root.Elements()
-                    let fi = rws.Descendants(hereTrafficNamespace + "FI").FirstOrDefault()
-                    let text = fi?.Descendants(hereTrafficNamespace + "SHP").FirstOrDefault()?.DescendantNodes().OfType<XText>()
-                    let cf = fi?.Descendants(hereTrafficNamespace + "CF").FirstOrDefault()
-                    select new TrafficParseData
-                    {
-                        // -1.0 if the default "unknown value" for confidence and jamFactor
-                        // as per the XML Schema used by Here API for Traffic Data
-                        Confidence = double.Parse(cf?.Attribute("CN")?.Value ?? "-1.0"),
-                        JamFactor = double.Parse(cf?.Attribute("JF")?.Value ?? "-1.0"),
-                        Shape = text?.FirstOrDefault()?.Value.Trim().Split(' ')
-                                                        .Where(x => !string.IsNullOrEmpty(x))
-                                                        .Select(x => x.Split(','))
-                                                        .Select(x => new double[]
-                                                        {
-                                                            double.Parse(x[1]),
-                                                            double.Parse(x[0])
-                                                        })
-                                                        .ToList()
-                    };
-                */
 
                 return trafficQuery.ToList();
             }

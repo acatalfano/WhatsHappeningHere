@@ -105,9 +105,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="html-resources\css\myStyles.css" />
-    <Content Include="html-resources\html\mapbox.html" />
-    <Content Include="html-resources\js\MapboxHeatmapLayerObjects.js" />
+    <Content Include="html-resources\css\myStyles.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html-resources\html\mapbox.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html-resources\js\MapboxHeatmapLayerObjects.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

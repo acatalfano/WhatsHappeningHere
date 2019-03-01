@@ -46,12 +46,9 @@ namespace WhatsHappeningHere.HttpResources
 
             string reqURL = _requestData.RequestUrl();
             
-            //SearchResponse = RetrieveResponse(reqURL).GetAwaiter().GetResult();
             var resp = RetrieveResponse(reqURL);
             SearchResponse = resp.GetAwaiter().GetResult();
-
-            //SearchResponse = RetrieveResponse(_requestData.RequestUrl()).GetAwaiter().GetResult();
-
+            
             _searchReady = false;
         }
 

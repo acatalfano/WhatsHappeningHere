@@ -7,8 +7,7 @@ namespace WhatsHappeningHere.HttpResources.QueryStringObjects
     public class HerePlacesExploreRequest
     {
         private const string _endpoint = "places/v1/discover/explore";
-
-        // TODO: maybe simplify which categories to use, later
+        
         private readonly string[] _validCategories =
             {   "eat-drink",                        "restaurant",                       "coffee-tea",
                 "snacks-fast-food",                 "bar-club",                         "coffee",
@@ -19,30 +18,7 @@ namespace WhatsHappeningHere.HttpResources.QueryStringObjects
                 "toilet-rest-area",                 "hospital-healthcare-facility"  };
 
         private string[] _categories;
-        /*
-         *  "eat-drink",                        "restaurant",                       "coffee-tea",
-            (restaurant)                        (restaurant)                        (cafe)
-
-            "snacks-fast-food",                 "bar-club",                         "coffee",
-            (fast-food)                         (bar)                               (cafe)
-
-            "tea",                              "going-out",                        "sights-museums",
-            (cafe)                              (bar)                               (museum)
-
-            "transport",                        "airport",                          "accomodation",
-            (bus)                               (airport)                           (lodging)
-
-            "shopping",                         "leisure-outdoor",                  "administrative-areas-buildings",
-            (shop)                              (natural)                           (building)
-            
-            "natural-geographical",             "petrol-station",                   "atm-bank-exchange",
-            (natural)                           (fuel)                              (bank)
-            
-            "toilet-rest-area",                 "hospital-healthcare-facility"
-            (toilet)                            (hospital)
-
-            else: (marker)
-         * */
+       
         public string[] Categories
         {
             get => _categories;

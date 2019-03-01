@@ -135,7 +135,7 @@ namespace WhatsHappeningHere
         private void RunSearchAndPlaceMarkers(BBoxData bbox)
         {
             // remove all current markers and popups, so new ones can be added
-            _instanceBrowser.ExecuteScriptAsync(string.Format(@"
+            _instanceBrowser.ExecuteScriptAsync(@"
                 (function(){{
                     if(mapboxMarkerArray.length != mapboxPopupArray.length){{
                         mapboxMarkerArray = [];
@@ -146,7 +146,7 @@ namespace WhatsHappeningHere
                         mapboxMarkerArray.pop().remove();
                         mapboxPopupArray.pop().remove();
                     }}
-                }})();"));
+                }})();");
 
 
             _searchObject.SetSearchRequest(lngWest: bbox.NW.Longitude,
