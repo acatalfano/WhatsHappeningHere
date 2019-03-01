@@ -38,9 +38,9 @@ namespace WhatsHappeningHere
 
         public void InitializeChromium()
         {
-            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-            string page = string.Format(@"{0}\html-resources\html\mapbox.html", projectDirectory);
-            
+            string directory = AppDomain.CurrentDomain.BaseDirectory;
+            string page = string.Format(@"{0}\html-resources\html\mapbox.html", directory);
+
             
             if(!File.Exists(page))
             {
