@@ -130,4 +130,10 @@
   </Target>
   <Import Project="..\packages\CefSharp.Common.71.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.71.0.0\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.WinForms.71.0.0\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.71.0.0\build\CefSharp.WinForms.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>@echo off
+if exist $(ProjectDir)"Web App Executable" rd /s /q $(ProjectDir)"Web App Executable"
+Robocopy /s /mt $(TargetDir) $(ProjectDir)\"Web App Executable"
+if errorlevel 1 exit /b 0</PostBuildEvent>
+  </PropertyGroup>
 </Project>
