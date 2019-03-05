@@ -1,4 +1,4 @@
-﻿namespace WhatsHappeningHere.HttpResources
+﻿namespace WhatsHappeningHere.HttpResources.HelperData
 {
     public class HerePlacesItem
     {

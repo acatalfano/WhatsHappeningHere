@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace WhatsHappeningHere.HttpResources
+namespace WhatsHappeningHere.HttpResources.Clients
 {
     public static class MapboxHttpClient
     {
         public static HttpClient Client { get; } = new HttpClient();
         public const string mapboxUsername = "acatalfano";
 
-        internal const string mapboxUploadToken = "sk.eyJ1IjoiYWNhdGFsZmFubyIsImEiOiJjanJsOW9kOGkwNjl4NGFtdWk4NnJ3cWRzIn0.6SXLfpeKrhngENAUKngsYg";
+        //internal const string mapboxUploadToken = "sk.eyJ1IjoiYWNhdGFsZmFubyIsImEiOiJjanJsOW9kOGkwNjl4NGFtdWk4NnJ3cWRzIn0.6SXLfpeKrhngENAUKngsYg";
 
         static MapboxHttpClient()
         {

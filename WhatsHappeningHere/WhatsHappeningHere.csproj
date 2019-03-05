@@ -60,18 +60,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="HttpResources\HereHttpClient.cs" />
-    <Compile Include="HttpResources\HerePlacesItem.cs" />
-    <Compile Include="HttpResources\HereSearch.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HttpResources\Clients\HereHttpClient.cs" />
+    <Compile Include="HttpResources\HelperData\BoundingBox.cs" />
+    <Compile Include="HttpResources\HelperData\HerePlacesItem.cs" />
+    <Compile Include="HttpResources\ParseHereSearchResponse.cs" />
     <Compile Include="HttpResources\JsonObjects\Feature.cs" />
     <Compile Include="HttpResources\JsonObjects\GeoJsonTraffic.cs" />
     <Compile Include="HttpResources\JsonObjects\HerePlacesExploreResponse.cs" />
     <Compile Include="HttpResources\JsonObjects\HereTrafficToMapboxLayer.cs" />
     <Compile Include="HttpResources\JsonObjects\RoadwayData.cs" />
     <Compile Include="HttpResources\JsonObjects\TrafficParseData.cs" />
-    <Compile Include="HttpResources\MapboxHttpClient.cs" />
-    <Compile Include="HttpResources\QueryStringObjects\HerePlacesExploreRequest.cs" />
-    <Compile Include="HttpResources\QueryStringObjects\HereTrafficFlowRequest.cs" />
+    <Compile Include="HttpResources\Clients\MapboxHttpClient.cs" />
+    <Compile Include="HttpResources\Requests\HerePlacesExploreRequest.cs" />
+    <Compile Include="HttpResources\Requests\HereTrafficFlowRequest.cs" />
     <Compile Include="JavascriptBoundClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,9 +133,7 @@
   <Import Project="..\packages\CefSharp.Common.71.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.71.0.0\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.WinForms.71.0.0\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.71.0.0\build\CefSharp.WinForms.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>@echo off
-if exist $(ProjectDir)"Web App Executable" rd /s /q $(ProjectDir)"Web App Executable"
-Robocopy /nfl /ndl /njh /njs /nc /ns /np /s /mt $(TargetDir) $(ProjectDir)\"Web App Executable" /xf *.pdb *.xml
-if errorlevel 1 exit /b 0</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

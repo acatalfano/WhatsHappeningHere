@@ -6,42 +6,16 @@ using WhatsHappeningHere.HttpResources;
 using WhatsHappeningHere.HttpResources.JsonObjects;
 using CefSharp;
 using System.Collections.Generic;
+using WhatsHappeningHere.HttpResources.Requests;
+using WhatsHappeningHere.HttpResources.HelperData;
 
 namespace WhatsHappeningHere
 {
     public class JavascriptBoundClass
     {
-        class BBoxData
-        {
-            public class Coordinates
-            {
-                public double Latitude { get; set; }
-                public double Longitude { get; set; }
-            }
-
-            public Coordinates NW { get; set; }
-            public Coordinates SE { get; set; }
-        }
-
-
-
-        private class HereAPICredentials
-        {
-            public string AppID { get; set; }
-            public string AppCode { get; set; }
-        }
-
-        private readonly HereAPICredentials _hereCredentials =
-            new HereAPICredentials
-            {
-                AppID = "EVeUmiv6qrPEaoKK9zNI",
-                AppCode = "Elq5ypOXQKI9VMQUOUE01w"
-            };
-
+        private HereTrafficFlowRequest TrafficFlowRequest = new HereTrafficFlowRequest();
         
-
-        
-        private HereSearch _searchObject = new HereSearch();
+        private ParseHereSearchResponse _searchObject = new ParseHereSearchResponse();
 
         private static ChromiumWebBrowser _instanceBrowser = null;
         private static Form1 _instanceForm = null;
@@ -63,8 +37,11 @@ namespace WhatsHappeningHere
         // return the JSON value as a string
         // (the result is parsed as a JSON object in JavaScript,
         //  then assigned to the map object from Mapbox GL JavaScript)
+        //
+        // Note: needs to remain non-static for Javascript Binding
         public string GetMapboxStyle(string styleID, string accessToken)
         {
+            // TODO change this
             var client = new RestClient(@"https://api.mapbox.com");
             
             var request = new RestRequest("styles/v1/{username}/{style_id}", Method.GET);
@@ -80,7 +57,7 @@ namespace WhatsHappeningHere
 
         public void HandleOnLoadEvent()
         {
-            BBoxData bbox = GetCurrentBBox();
+            BoundingBox bbox = GetCurrentBBox();
 
             if (BoundsInvalid(bbox))
             {
@@ -98,7 +75,7 @@ namespace WhatsHappeningHere
 
         public void HandleOnMoveEndEvent()
         {
-            BBoxData bbox = GetCurrentBBox();
+            BoundingBox bbox = GetCurrentBBox();
 
             if (BoundsInvalid(bbox))
             {
@@ -127,12 +104,12 @@ namespace WhatsHappeningHere
 
 
 
-        private bool BoundsInvalid(BBoxData bbox) =>
+        private static bool BoundsInvalid(BoundingBox bbox) =>
             (Math.Abs(bbox.NW.Latitude - bbox.SE.Latitude) > 1.0) ||
             (Math.Abs(bbox.NW.Longitude - bbox.SE.Longitude) > 1.0);
 
         
-        private void RunSearchAndPlaceMarkers(BBoxData bbox)
+        private void RunSearchAndPlaceMarkers(BoundingBox bbox)
         {
             // remove all current markers and popups, so new ones can be added
             _instanceBrowser.ExecuteScriptAsync(@"
@@ -167,7 +144,7 @@ namespace WhatsHappeningHere
         }
 
 
-        private BBoxData GetCurrentBBox()
+        private BoundingBox GetCurrentBBox()
         {
             JavascriptResponse scriptResponse =
                 _instanceBrowser.EvaluateScriptAsync(methodName: "getBBoxParams").GetAwaiter().GetResult();
@@ -177,14 +154,14 @@ namespace WhatsHappeningHere
             var southeast = (IDictionary<string, object>)result["SE"];
 
 
-            var coords = new BBoxData
+            var coords = new BoundingBox
             {
-                NW = new BBoxData.Coordinates
+                NW = new Coordinates
                 {
                     Latitude = Convert.ToDouble(northwest["lat"].ToString()),
                     Longitude = Convert.ToDouble(northwest["lng"].ToString())
                 },
-                SE = new BBoxData.Coordinates
+                SE = new Coordinates
                 {
                     Latitude = Convert.ToDouble(southeast["lat"].ToString()),
                     Longitude = Convert.ToDouble(southeast["lng"].ToString())
@@ -197,33 +174,15 @@ namespace WhatsHappeningHere
 
 
 
-        private string GenerateTrafficFlowGeoJson(BBoxData bbox)
+        private string GenerateTrafficFlowGeoJson(BoundingBox bbox)
         {
-            string responseXML = GetTrafficXMLFromHereAPI(bbox.NW.Latitude, bbox.NW.Longitude, bbox.SE.Latitude, bbox.SE.Longitude);
+            TrafficFlowRequest.BBox = bbox;
+            string responseXML = TrafficFlowRequest.MakeRequest();
+
             List<TrafficParseData> trafficFlowData = HereTrafficToMapboxLayer.ParseTrafficData(responseXML);
             string geoJson = HereTrafficToMapboxLayer.GenerateGeoJSON(trafficFlowData);
 
             return geoJson;
         }
-
-        
-        private string GetTrafficXMLFromHereAPI(double lat1, double lng1, double lat2, double lng2)
-        {
-            
-            var client = new RestClient(@"https://traffic.api.here.com");
-
-            var request = new RestRequest("traffic/6.2/flow.xml", Method.GET);
-            request.AddParameter("app_id", _hereCredentials.AppID);
-            request.AddParameter("app_code", _hereCredentials.AppCode);
-            request.AddParameter("bbox", $"{lat1},{lng1};{lat2},{lng2}");
-            request.AddParameter("responseattributes", "shape");
-            request.AddParameter("units", "imperial");
-            
-            var response = client.ExecuteTaskAsync(request).GetAwaiter().GetResult();
-
-            return response.Content;
-            
-        }
-        
     }
 }

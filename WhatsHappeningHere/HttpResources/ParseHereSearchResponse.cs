@@ -2,16 +2,17 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using WhatsHappeningHere.HttpResources.HelperData;
 
 namespace WhatsHappeningHere.HttpResources
 {
-    public class HereSearch
+    public class ParseHereSearchResponse
     {
         // flag used to ensure that the search parameters are either set or refreshed
         // before the search request is performed
         private bool _searchReady = false;
         // object internally storing the request data
-        private QueryStringObjects.HerePlacesExploreRequest _requestData;
+        private Requests.HerePlacesExploreRequest _requestData;
 
         // response property
         public JsonObjects.HerePlacesExploreResponse SearchResponse { get; set; }
@@ -21,7 +22,7 @@ namespace WhatsHappeningHere.HttpResources
         // marks the search as ready to be performed
         public void SetSearchRequest(double lngWest, double latSouth, double lngEast, double latNorth)
         {
-            _requestData = new QueryStringObjects.HerePlacesExploreRequest(
+            _requestData = new Requests.HerePlacesExploreRequest(
                 _west: lngWest,
                 _south: latSouth,
                 _east: lngEast,
@@ -57,7 +58,7 @@ namespace WhatsHappeningHere.HttpResources
         // async helper method to perform the search request
         private async Task<JsonObjects.HerePlacesExploreResponse> RetrieveResponse(string requestUrl)
         {
-            string responseContent = await HereHttpClient.PlacesClient.GetStringAsync(requestUrl);
+            string responseContent = await Clients.HereHttpClient.PlacesClient.GetStringAsync(requestUrl);
 
             var jsonParse = JObject.Parse(responseContent);
             var query =
