@@ -3,34 +3,14 @@ using System.Net.Http;
 
 namespace WhatsHappeningHere.HttpResources.Clients
 {
-    public class MapboxHttpClient : IDisposable
+    public class MapboxHttpClient
     {
-        public static HttpClient Client { get; } = new HttpClient();
+        public static HttpClient Client { get; } = new HttpClient()
+        {
+            BaseAddress = new Uri(@"https://api.mapbox.com/")
+        };
+
         public const string mapboxUsername = "acatalfano";
-
-        static MapboxHttpClient()
-        {
-            Client.BaseAddress = new Uri(@"https://api.mapbox.com/");
-        }
-
-        #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    Client.Dispose();
-                }
-
-                disposedValue = true;
-            }
-        }
-
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose() => Dispose(true);
-        #endregion
+        
     }
 }
