@@ -1,4 +1,4 @@
-﻿using WhatsHappeningHere.HttpResources.Clients;
+﻿/*using WhatsHappeningHere.HttpResources.Clients;
 
 namespace WhatsHappeningHere.HttpResources.Requests
 {
@@ -27,3 +27,4 @@ namespace WhatsHappeningHere.HttpResources.Requests
         private string QueryString() => $"?in={West},{South},{East},{North}" + HereHttpClient.CredentialsUrlSegment();
     }
 }
+*/

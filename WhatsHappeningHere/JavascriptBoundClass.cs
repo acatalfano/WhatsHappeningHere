@@ -20,11 +20,7 @@ namespace WhatsHappeningHere
 
         private static ChromiumWebBrowser _instanceBrowser = null;
         private static Form1 _instanceForm = null;
-
-        public JavascriptBoundClass()
-        {
-
-        }
+        
 
 
         public JavascriptBoundClass(ChromiumWebBrowser originalBrowser, Form1 originalForm)
@@ -115,10 +111,7 @@ namespace WhatsHappeningHere
                 }})();");
 
 
-            _searchObject.SetSearchRequest(lngWest: bbox.NW.Longitude,
-                                            latSouth: bbox.SE.Latitude,
-                                            lngEast: bbox.SE.Longitude,
-                                            latNorth: bbox.NW.Latitude);
+            _searchObject.SetSearchBBox(bbox);
             _searchObject.PerformSearch();
 
             foreach (HerePlacesItem result in _searchObject.SearchResponse)

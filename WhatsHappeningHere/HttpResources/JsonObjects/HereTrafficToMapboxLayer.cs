@@ -58,7 +58,7 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                 {
                     root = XElement.Load(trafficXmlReader);
                 }
-                catch(XmlException e)
+                catch(XmlException)
                 {
                     return new List<TrafficParseData>();
                 }

@@ -9,7 +9,7 @@ namespace WhatsHappeningHere.HttpResources.Clients
         public static HttpClient TrafficClient { get; } = new HttpClient();
 
         private const string appID = "EVeUmiv6qrPEaoKK9zNI";
-        private const string appCode = "Elq5ypOXQKI9VMQUOUE01w";
+        private static readonly string appCode = "Elq5ypOXQKI9VMQUOUE01w";
 
         static HereHttpClient()
         {
