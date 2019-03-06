@@ -74,14 +74,14 @@ You can also jump to a location by searching it in the text field in the upper-r
 This section goes over the supporting libraries and technologies that make this app possible.
 
 ### Web Service APIs Used
-[Mapbox](https://www.mapbox.com/) - For map that is the core of this app.
-[Here APIs](https://developer.here.com/) - For the live traffic data as well as the points of interest data.
+- [Mapbox](https://www.mapbox.com/) - For map that is the core of this app.
+- [Here APIs](https://developer.here.com/) - For the live traffic data as well as the points of interest data.
 
 ### Development Technologies Used
-[CefSharp](https://cefsharp.github.io/) - CefSharp is the library used to embed the web browser into a Windows Form.
-[RestSharp](http://restsharp.org/) - RestSharp was used for building organized and clear calls to the Web Service APIs.
-[Newtonsoft Json.NET](https://www.newtonsoft.com/json) - Json.NET by Newtonsoft was used to handle the JSON response and request data.
-[Visual Studio](https://visualstudio.microsoft.com/) - Visual Studio made for a streamlined development experience in designing this app.
+- [CefSharp](https://cefsharp.github.io/) - CefSharp is the library used to embed the web browser into a Windows Form.
+- [Newtonsoft Json.NET](https://www.newtonsoft.com/json) - Json.NET by Newtonsoft was used to handle the JSON response and request data.
+- [.NET Framework](https://dotnet.microsoft.com/) - Development version 4.5.2 of Microsoft's .NET Framework was used in building this app.
+- [Visual Studio](https://visualstudio.microsoft.com/) - Visual Studio made for a streamlined development experience in designing this app.
 
 
 ### Languages Used in Development
