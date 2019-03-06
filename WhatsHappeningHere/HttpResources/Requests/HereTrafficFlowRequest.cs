@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
-using WhatsHappeningHere.HttpResources.HelperData;
+using WhatsHappeningHere.HttpResources.DataObjects.HelperData;
 
 namespace WhatsHappeningHere.HttpResources.Requests
 {

@@ -1,12 +1,11 @@
 ﻿using System;
 using CefSharp.WinForms;
-
-using WhatsHappeningHere.HttpResources;
-using WhatsHappeningHere.HttpResources.JsonObjects;
 using CefSharp;
 using System.Collections.Generic;
 using WhatsHappeningHere.HttpResources.Requests;
-using WhatsHappeningHere.HttpResources.HelperData;
+using WhatsHappeningHere.HttpResources.DataObjects.DataTransformations;
+using WhatsHappeningHere.HttpResources.DataObjects.HelperData;
+using WhatsHappeningHere.HttpResources.DataObjects.ResponseObjects;
 
 namespace WhatsHappeningHere
 {

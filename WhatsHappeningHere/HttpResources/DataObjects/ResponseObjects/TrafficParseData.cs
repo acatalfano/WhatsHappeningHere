@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WhatsHappeningHere.HttpResources.JsonObjects
+namespace WhatsHappeningHere.HttpResources.DataObjects.ResponseObjects
 {
     public class TrafficParseData
     {

@@ -6,18 +6,18 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Xml;
 
-namespace WhatsHappeningHere.HttpResources.JsonObjects
+namespace WhatsHappeningHere.HttpResources.DataObjects.DataTransformations
 {
     public static class HereTrafficToMapboxLayer
     {
-        public static string GenerateGeoJSON(List<TrafficParseData> data)
+        public static string GenerateGeoJSON(List<ResponseObjects.TrafficParseData> data)
         {
             var jsonQuery =
                 from datum in data
                 from FI in datum.FIList
-                select new Feature
+                select new GeoJsonRequestObjects.Feature
                 {
-                    Properties = new PropertyData
+                    Properties = new GeoJsonRequestObjects.PropertyData
                     {
                         Confidence = FI.Confidence,
                         JamFactor = FI.JamFactor,
@@ -28,13 +28,13 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                         RoadName = datum.RoadName,
                         LinearIdentifier = datum.LinearIdentifier
                     },
-                    Geometry = new GeoData
+                    Geometry = new GeoJsonRequestObjects.GeoData
                     {
                         Coordinates = (FI.Shape != null) ? new List<double[]>(FI.Shape) : null
                     }
                 };
             
-            GeoJsonTraffic geoJsonData = new GeoJsonTraffic
+            GeoJsonRequestObjects.GeoJsonTraffic geoJsonData = new GeoJsonRequestObjects.GeoJsonTraffic
             {
                 Features = jsonQuery.ToList()
             };
@@ -49,7 +49,7 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
 
 
 
-        public static List<TrafficParseData> ParseTrafficData(string trafficFlowXML)
+        public static List<ResponseObjects.TrafficParseData> ParseTrafficData(string trafficFlowXML)
         {
             using(StringReader trafficXmlReader = new StringReader(trafficFlowXML))
             {
@@ -60,7 +60,7 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                 }
                 catch(XmlException)
                 {
-                    return new List<TrafficParseData>();
+                    return new List<ResponseObjects.TrafficParseData>();
                 }
                 XNamespace hereTrafficNamespace = root.Attribute("xmlns").Value;
 
@@ -69,7 +69,7 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                     let fi = rw.Descendants(hereTrafficNamespace + "FI")
                     let tmc = fi.Descendants(hereTrafficNamespace + "TMC").FirstOrDefault()
                     let cf = fi.Descendants(hereTrafficNamespace + "CF")
-                    select new TrafficParseData
+                    select new ResponseObjects.TrafficParseData
                     {
                         RoadName = rw?.Attribute("DE")?.Value,
                         LinearIdentifier = rw?.Attribute("LI")?.Value,
@@ -95,7 +95,7 @@ namespace WhatsHappeningHere.HttpResources.JsonObjects
                                                                                 }
                                                                 )?.ToList() // select coords
 
-                                select new RoadwayData
+                                select new ResponseObjects.RoadwayData
                                 {
                                     PointTMCLocationCode = int.Parse(tmc?.Attribute("PC")?.Value ?? "-1"),
                                     RoadSegmentName = tmc?.Attribute("DE")?.Value,

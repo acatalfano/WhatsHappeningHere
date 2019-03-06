@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using WhatsHappeningHere.HttpResources.HelperData;
+using WhatsHappeningHere.HttpResources.DataObjects.HelperData;
 
-namespace WhatsHappeningHere.HttpResources.JsonObjects
+namespace WhatsHappeningHere.HttpResources.DataObjects.ResponseObjects
 {
     public class HerePlacesExploreResponse
     {

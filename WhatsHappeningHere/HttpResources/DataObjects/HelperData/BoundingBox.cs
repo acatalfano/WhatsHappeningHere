@@ -1,4 +1,4 @@
-﻿namespace WhatsHappeningHere.HttpResources.HelperData
+﻿namespace WhatsHappeningHere.HttpResources.DataObjects.HelperData
 {
     public class Coordinates
     {

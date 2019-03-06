@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace WhatsHappeningHere.HttpResources.JsonObjects
+namespace WhatsHappeningHere.HttpResources.DataObjects.GeoJsonRequestObjects
 {
     internal class GeoJsonTraffic
     {

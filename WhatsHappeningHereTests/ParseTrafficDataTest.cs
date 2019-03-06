@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using WhatsHappeningHere.HttpResources.JsonObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using WhatsHappeningHere.HttpResources.DataObjects.ResponseObjects;
+using WhatsHappeningHere.HttpResources.DataObjects.DataTransformations;
+using WhatsHappeningHere.HttpResources.DataObjects.GeoJsonRequestObjects;
 
 namespace WhatsHappeningHere.Test
 {

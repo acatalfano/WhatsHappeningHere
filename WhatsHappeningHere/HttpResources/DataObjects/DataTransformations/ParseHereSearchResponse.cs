@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using WhatsHappeningHere.HttpResources.HelperData;
+using WhatsHappeningHere.HttpResources.DataObjects.HelperData;
 using WhatsHappeningHere.HttpResources.Clients;
 
-namespace WhatsHappeningHere.HttpResources
+namespace WhatsHappeningHere.HttpResources.DataObjects.DataTransformations
 {
     public class ParseHereSearchResponse
     {
@@ -40,7 +40,7 @@ namespace WhatsHappeningHere.HttpResources
         private bool _searchReady = false;
 
         // response property
-        public JsonObjects.HerePlacesExploreResponse SearchResponse { get; set; }
+        public ResponseObjects.HerePlacesExploreResponse SearchResponse { get; set; }
         
         // if the search is ready to be performed,
         //      makes the async call to the RetrieveResponse(string) method
@@ -65,7 +65,7 @@ namespace WhatsHappeningHere.HttpResources
 
         
         // async helper method to perform the search request
-        private async Task<JsonObjects.HerePlacesExploreResponse> RetrieveResponse(string requestUrl)
+        private async Task<ResponseObjects.HerePlacesExploreResponse> RetrieveResponse(string requestUrl)
         {
             string responseContent = await HereHttpClient.PlacesClient.GetStringAsync(requestUrl);
 
@@ -82,7 +82,7 @@ namespace WhatsHappeningHere.HttpResources
                     Icon        = (string)item["icon"]
                 };
 
-            return new JsonObjects.HerePlacesExploreResponse
+            return new ResponseObjects.HerePlacesExploreResponse
             {
                 Results = query.ToList(),
                 NextUrl = (string)jsonParse["results"]["next"]

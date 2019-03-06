@@ -59,15 +59,15 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpResources\Clients\HereHttpClient.cs" />
-    <Compile Include="HttpResources\HelperData\BoundingBox.cs" />
-    <Compile Include="HttpResources\HelperData\HerePlacesItem.cs" />
-    <Compile Include="HttpResources\ParseHereSearchResponse.cs" />
-    <Compile Include="HttpResources\JsonObjects\Feature.cs" />
-    <Compile Include="HttpResources\JsonObjects\GeoJsonTraffic.cs" />
-    <Compile Include="HttpResources\JsonObjects\HerePlacesExploreResponse.cs" />
-    <Compile Include="HttpResources\JsonObjects\HereTrafficToMapboxLayer.cs" />
-    <Compile Include="HttpResources\JsonObjects\RoadwayData.cs" />
-    <Compile Include="HttpResources\JsonObjects\TrafficParseData.cs" />
+    <Compile Include="HttpResources\DataObjects\HelperData\BoundingBox.cs" />
+    <Compile Include="HttpResources\DataObjects\HelperData\HerePlacesItem.cs" />
+    <Compile Include="HttpResources\DataObjects\DataTransformations\ParseHereSearchResponse.cs" />
+    <Compile Include="HttpResources\DataObjects\GeoJsonRequestObjects\Feature.cs" />
+    <Compile Include="HttpResources\DataObjects\GeoJsonRequestObjects\GeoJsonTraffic.cs" />
+    <Compile Include="HttpResources\DataObjects\ResponseObjects\HerePlacesExploreResponse.cs" />
+    <Compile Include="HttpResources\DataObjects\DataTransformations\HereTrafficToMapboxLayer.cs" />
+    <Compile Include="HttpResources\DataObjects\ResponseObjects\RoadwayData.cs" />
+    <Compile Include="HttpResources\DataObjects\ResponseObjects\TrafficParseData.cs" />
     <Compile Include="HttpResources\Clients\MapboxHttpClient.cs" />
     <Compile Include="HttpResources\Requests\HerePlacesExploreRequest.cs" />
     <Compile Include="HttpResources\Requests\HereTrafficFlowRequest.cs" />
