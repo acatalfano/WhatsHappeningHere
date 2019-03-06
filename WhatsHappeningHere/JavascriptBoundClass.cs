@@ -1,6 +1,5 @@
 ﻿using System;
 using CefSharp.WinForms;
-using RestSharp;
 
 using WhatsHappeningHere.HttpResources;
 using WhatsHappeningHere.HttpResources.JsonObjects;
@@ -14,6 +13,8 @@ namespace WhatsHappeningHere
     public class JavascriptBoundClass
     {
         private HereTrafficFlowRequest TrafficFlowRequest = new HereTrafficFlowRequest();
+
+        private MapboxStyleRequest StyleRequest = new MapboxStyleRequest();
         
         private ParseHereSearchResponse _searchObject = new ParseHereSearchResponse();
 
@@ -31,7 +32,7 @@ namespace WhatsHappeningHere
             _instanceBrowser = originalBrowser;
             _instanceForm = originalForm;
         }
-        
+
 
         // Make a GET request to the Mapbox Styles API to retrieve the style JSON
         // return the JSON value as a string
@@ -39,20 +40,8 @@ namespace WhatsHappeningHere
         //  then assigned to the map object from Mapbox GL JavaScript)
         //
         // Note: needs to remain non-static for Javascript Binding
-        public string GetMapboxStyle(string styleID, string accessToken)
-        {
-            // TODO change this
-            var client = new RestClient(@"https://api.mapbox.com");
-            
-            var request = new RestRequest("styles/v1/{username}/{style_id}", Method.GET);
-            request.AddUrlSegment("username", "acatalfano");
-            request.AddUrlSegment("style_id", styleID);
-            request.AddParameter("access_token", accessToken);
-
-            var response = client.ExecuteTaskAsync(request).GetAwaiter().GetResult();
-
-            return response.Content;
-        }
+        public string GetMapboxStyle(string styleID, string accessToken) =>
+            StyleRequest.MakeRequest(styleID, accessToken);
 
 
         public void HandleOnLoadEvent()

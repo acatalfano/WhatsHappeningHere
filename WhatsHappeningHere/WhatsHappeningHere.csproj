@@ -74,6 +74,7 @@
     <Compile Include="HttpResources\Clients\MapboxHttpClient.cs" />
     <Compile Include="HttpResources\Requests\HerePlacesExploreRequest.cs" />
     <Compile Include="HttpResources\Requests\HereTrafficFlowRequest.cs" />
+    <Compile Include="HttpResources\Requests\MapboxStyleRequest.cs" />
     <Compile Include="JavascriptBoundClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
